@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE warehouses [
+    <!ELEMENT warehouses (warehouse+)>
+    <!ELEMENT warehouse (id, name, address, items)>
+    <!ELEMENT address (street, city, country)>
+    <!ELEMENT items (item+) >
+    <!ELEMENT item (id, im_id , name , price , qty) >
+    <!ELEMENT street (#PCDATA)>
+    <!ELEMENT city (#PCDATA)>
+    <!ELEMENT country (#PCDATA)>
+    <!ELEMENT price (#PCDATA)>
+    <!ELEMENT qty (#PCDATA)>
+    <!ELEMENT id (#PCDATA)>
+    <!ELEMENT name (#PCDATA)>
+    <!ELEMENT im_id (#PCDATA) >
+]>
