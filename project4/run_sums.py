@@ -16,7 +16,7 @@ args = parser.parse_args()
 def sum_balance(sess):
     ## 1. Execute a query that sum the balance of all accounts.
     ## 2. Fetch the result and return it.
-    return sess.execute("SELECT SUM(balance) FROM account").fetchone()[0]
+    return sess.execute("SELECT SUM(ACCOUNT.BALANCE) FROM ACCOUNT").scalar()
 
 
 ## Create S sums operations

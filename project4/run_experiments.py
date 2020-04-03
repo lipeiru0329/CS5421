@@ -23,7 +23,7 @@ sess = Session()
 
 times = []
 correct = []
-for i in range(0, 10):
+for i in range(0, 3):
     ## Calculate the correct sum before applying the function
     p0 = subprocess.Popen(
         ['python3', 'run_sums.py', str(1), args.I], stdout=subprocess.PIPE)

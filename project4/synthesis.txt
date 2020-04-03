@@ -3,29 +3,63 @@
 % looking at your results in S-correctness.csv                                %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  
+1. For all the result from Seriable and repeatable read are always 1, 
+while most of data from read commit are larger than the data from read uncommit slightly
 
+Reason:
+    1. Since Serializable is strictest among the four. Serializable prevent the Dirty Read, Nonrepeatable Read and Phantom Read. 
+    2. Repeatable Read can prevent Dirty Read, Nonrepeatable Read
 
-
+2. when S increase, the mean and variance are decreasing. 
+Since when S increase, the probability to write the same line is increasing, So it is more possible to calculate wrong result using sum. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Synthesise concisely the observations that you can make from                %
 % looking at your results in S-time.csv                                       %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+1. the uncommited and commited execution time are relative similiar. 
+Compared to them,  most of time, the Repeatable read and Serializable are larger. 
 
+Since the isolation level defines 4 level of transaction isolation. Te order is ReadUnCommit, ReadCommit, Repeatable Read, Serializable. 
+So, the execution of Seriable should be largest accordingly. 
 
-
+2. Most of time, time is increasing when S increase, but maybe since there is a lot of programming running at the same time, when I running python project. 
+So the increase is not so significant. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Synthesise concisely the observations that you can make from                %
 % looking at your results in P-correctness.csv                                %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  
+1. The repeatable read and Serializable are always 1, mostly, the read uncommit is smallest and the variance is largest. 
 
+Reason:
+1. Since Serializable is strictest among the four. Serializable prevent the Dirty Read, Nonrepeatable Read and Phantom Read. 
+2. Repeatable Read can prevent Dirty Read, Nonrepeatable Read
+3. ReadCommit can prevent Dirty Read
+4. ReadUnCommit do not prevent anything. 
 
+So we can see the ReadUnCommit has least correctness
 
+2. Compared to ReadCommit, ReadUnCommit is slightly smaller. 
+Since ReadCommit can prevent Dirty Read. So in this case, dirty read is not much. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Synthesise concisely the observations that you can make from                %
 % looking at your results in P-time.csv                                       %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+1. We found that when P = 70, 80, 90, the time is slightly larger. 
+
+Reason:
+
+1. Maybe the available resource is varying when I run the programme. Since there is something else running in my computer, these tasks may affect the result. 
+2. As the number of subprocess increases, it may speed up subprocess increases. In the other hand, when subprocess increases, it is more probability to update one cell
+by difference subprocess, which can trigger lock in database. The time will increase. 
+
+2. ReadCommit and ReadUnCommit is smaller than Repeatable Read and Serializable. Specifically, Serializable is using more time than Repeatable Read. 
+
+Reason:
+1. The isolation level defines 4 level transaction isolation. The strictest order is ReadUnCommit, ReadCommit, Repeatable Read, Serializable. 
+So Serializable is using most time since it is strictest. 
